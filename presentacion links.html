@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descarga Nuvio VIP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #fafafa; color: #111; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .tab-btn { transition: all 0.2s ease; }
+        .tab-active { background-color: #111; color: #fff; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        .tab-inactive { background-color: transparent; color: #555; }
+        .tab-inactive:hover { color: #111; background-color: #f0f0f0; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center pt-10 md:pt-20 px-4 md:px-8 pb-10">
+
+    <div class="w-full max-w-[1200px]">
+        
+        <!-- Header -->
+        <div class="mb-10 text-center md:text-left">
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4 text-gray-900">Elige tu equipo.</h1>
+            <p class="text-lg text-gray-500 max-w-2xl mx-auto md:mx-0">Cada versión está construida para optimizar el rendimiento de tu pantalla. Elige el tipo de dispositivo que tienes y la descarga estará lista.</p>
+        </div>
+
+        <!-- Menú de "Píldora" (Tabs) -->
+        <div class="flex justify-center md:justify-start mb-8">
+            <div class="bg-white border border-gray-200 rounded-full p-1.5 flex shadow-sm space-x-1">
+                <button id="btn-moderno" onclick="cambiarTab('moderno')" class="tab-btn tab-active px-5 py-2.5 md:px-6 rounded-full text-sm font-semibold flex items-center">
+                    <i class="fas fa-tv mr-2"></i> Equipos Recientes
+                </button>
+                <button id="btn-basico" onclick="cambiarTab('basico')" class="tab-btn tab-inactive px-5 py-2.5 md:px-6 rounded-full text-sm font-semibold flex items-center">
+                    <i class="fas fa-box mr-2"></i> TV Box / Lite
+                </button>
+            </div>
+        </div>
+
+        <!-- Tarjeta Negra (Contenido Dinámico) -->
+        <div id="card-content" class="bg-[#111111] text-white rounded-[2rem] p-6 md:p-12 shadow-2xl relative overflow-hidden min-h-[450px]">
+            <!-- El contenido se inyecta por JS -->
+        </div>
+
+        <!-- Botón de WhatsApp -->
+        <div class="mt-12 text-center">
+            <a href="https://wa.me/50588726505?text=Hola,%20ya%20termin%C3%A9%20la%20instalaci%C3%B3n.%20Quiero%20mi%20acceso." target="_blank" class="inline-flex items-center text-gray-500 hover:text-green-600 transition font-medium text-sm md:text-base">
+                <i class="fab fa-whatsapp text-xl mr-2"></i> ¿Ya instalaste? Haz clic aquí para pedir tu acceso
+            </a>
+        </div>
+
+    </div>
+
+    <script>
+        const datos = {
+            moderno: {
+                titulo: 'Nuvio para Smart TVs y Equipos Recientes',
+                descripcion: 'Diseñado para Google TV, Chromecast 4K, Nvidia Shield y Smart TVs de última generación.',
+                link: 'https://github.com/NuvioMedia/NuvioTV/releases/download/1.0.0/app-full-universal-release.apk',
+                codigo_downloader: '9529549',
+                btn_texto: 'Descargar APK Universal',
+                logos: '<i class="fab fa-android text-4xl text-[#3DDC84]"></i>'
+            },
+            basico: {
+                titulo: 'Nuvio Lite para TV Box y Poco Espacio',
+                descripcion: 'Versión optimizada (32-bits) para Cajas Android, Firesticks antiguos o televisores con memoria llena.',
+                link: 'https://github.com/NuvioMedia/NuvioTV/releases/download/1.0.0/app-full-armeabi-v7a-release.apk',
+                codigo_downloader: '6061325',
+                btn_texto: 'Descargar APK Lite (69MB)',
+                logos: '<i class="fas fa-microchip text-4xl text-orange-500"></i>'
+            }
+        };
+
+        function cambiarTab(tipo) {
+            const btnModerno = document.getElementById('btn-moderno');
+            const btnBasico = document.getElementById('btn-basico');
+
+            if (tipo === 'moderno') {
+                btnModerno.className = 'tab-btn tab-active px-5 py-2.5 md:px-6 rounded-full text-sm font-semibold flex items-center';
+                btnBasico.className = 'tab-btn tab-inactive px-5 py-2.5 md:px-6 rounded-full text-sm font-semibold flex items-center';
+            } else {
+                btnBasico.className = 'tab-btn tab-active px-5 py-2.5 md:px-6 rounded-full text-sm font-semibold flex items-center';
+                btnModerno.className = 'tab-btn tab-inactive px-5 py-2.5 md:px-6 rounded-full text-sm font-semibold flex items-center';
+            }
+
+            const info = datos[tipo];
+            document.getElementById('card-content').innerHTML = `
+                <div class="fade-in grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-10 items-center">
+                    
+                    <!-- Columna Izquierda (Tutorial Visual) -->
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold mb-3 leading-tight">${info.titulo}</h2>
+                        <p class="text-gray-400 text-base mb-8 leading-relaxed">${info.descripcion}</p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-6">
+                            <!-- Paso 1: App Downloader (DISEÑO EXACTO A LA IMAGEN) -->
+                            <div class="flex-1 bg-white/5 rounded-2xl p-5 border border-white/10 relative mt-4 sm:mt-0">
+                                <div class="absolute -top-4 -left-3 bg-orange-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-lg">1</div>
+                                <h4 class="text-xs font-bold text-gray-300 uppercase tracking-wider mb-4 text-center">Descarga esta app</h4>
+                                
+                                <!-- RECREACIÓN PERFECTA DE LA IMAGEN DE DOWNLOADER -->
+                                <div class="bg-[#F37021] rounded-xl p-3 flex flex-col items-center justify-center shadow-inner mb-3 mx-auto w-40">
+                                    <svg viewBox="0 0 100 110" class="w-14 h-14 mb-1">
+                                        <!-- Flecha -->
+                                        <path d="M 25 10 h 25 v 55 h 20 L 37.5 100 L 5 65 h 20 Z" fill="white" />
+                                        <!-- Curva de la D -->
+                                        <path d="M 50 10 h 15 c 30 0, 30 55, 0 55 h -15 Z" fill="white" />
+                                        <!-- Hueco interno color naranja -->
+                                        <path d="M 50 30 h 5 c 12 0, 12 25, 0 25 h -5 Z" fill="#F37021" />
+                                    </svg>
+                                    <span class="text-white font-bold text-lg tracking-wide font-sans">Downloader</span>
+                                </div>
+                                
+                                <p class="text-[11px] text-gray-400 text-center leading-tight">Búscala en la tienda de tu TV e instálala.</p>
+                            </div>
+
+                            <!-- Paso 2: Código -->
+                            <div class="flex-1 bg-white/5 rounded-2xl p-5 border border-white/10 relative mt-4 sm:mt-0 flex flex-col justify-center">
+                                <div class="absolute -top-4 -left-3 bg-green-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-lg">2</div>
+                                <h4 class="text-xs font-bold text-gray-300 uppercase tracking-wider mb-4 text-center">Ingresa el código</h4>
+                                <p class="text-[12px] text-gray-400 mb-3 text-center">Abre Downloader y escribe este número:</p>
+                                <div class="bg-black/50 py-4 px-2 rounded-xl text-center border border-green-500/30">
+                                    <span class="font-mono text-green-400 text-3xl md:text-4xl font-black tracking-widest">${info.codigo_downloader}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Columna Derecha (Opción USB Alternativa) -->
+                    <div class="flex flex-col items-center justify-center lg:border-l lg:border-white/10 lg:pl-10 mt-6 lg:mt-0 pt-8 lg:pt-0 border-t border-white/10 lg:h-full">
+                        <div class="flex items-center space-x-4 mb-6">
+                            ${info.logos}
+                            <span class="text-xl font-bold tracking-tight">Android TV</span>
+                        </div>
+                        
+                        <a href="${info.link}" class="bg-[#1f1f1f] hover:bg-[#2a2a2a] text-white border border-white/20 px-6 py-4 rounded-full font-bold transition flex items-center shadow-lg w-full justify-center text-sm">
+                            <i class="fas fa-download mr-3"></i> ${info.btn_texto}
+                        </a>
+                        <p class="text-xs text-gray-500 text-center mt-4 px-4 leading-relaxed">
+                            <strong>Alternativa:</strong> Usa este botón para descargar el archivo a una memoria USB desde tu computadora.
+                        </p>
+                    </div>
+
+                </div>
+            `;
+        }
+
+        // Cargar por defecto la primera pestaña
+        cambiarTab('moderno');
+    </script>
+</body>
+</html>
